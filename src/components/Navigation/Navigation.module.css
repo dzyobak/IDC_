@@ -1,0 +1,12 @@
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  color: red;
+  font-weight: bolder;
+  font-style: italic;
+  font-size: 24px;
+}

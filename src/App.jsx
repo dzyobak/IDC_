@@ -4,10 +4,14 @@ import Home from "../src/pages/Home/Home";
 import Store from "../src/pages/Store/Store";
 import Social from "../src/pages/Social/Social";
 import Vlogs from "../src/pages/Vlogs/Vlogs";
+import Navigation from "../src/components/Navigation/Navigation";
 
 function App() {
   return (
     <>
+      <header>
+        <Navigation />
+      </header>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<Store />} />
