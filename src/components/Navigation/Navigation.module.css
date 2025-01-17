@@ -9,4 +9,14 @@
   font-weight: bolder;
   font-style: italic;
   font-size: 24px;
+  padding-right: 170px;
+}
+
+.logo{
+  padding-right: 10px;
+  width: 150px;
+}
+
+.hr{
+  border: 5px solid red;
 }

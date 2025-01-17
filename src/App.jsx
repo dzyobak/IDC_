@@ -9,6 +9,8 @@ import Navigation from "../src/components/Navigation/Navigation";
 function App() {
   return (
     <>
+      <div className="container">
+        <div className="layout">
       <header>
         <Navigation />
       </header>
@@ -18,6 +20,8 @@ function App() {
         <Route path="/social" element={<Social />} />
         <Route path="/vlogs" element={<Vlogs />} />
       </Routes>
+      </div>
+        </div>
     </>
   );
 }
