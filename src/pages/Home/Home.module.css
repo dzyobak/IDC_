@@ -1,20 +1,20 @@
-.photo{
-    width: 800px;       /* Ensure responsiveness */
-    height: 300px;   
-    margin: auto;
+.photo {
+  width: 850px; /* Ensure responsiveness */
+  height: 300px;
+  margin: auto;
 }
 
-.homne_wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+.home_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
-.title{
-    position: absolute;
-    font-size: 72px;
-    font-style: italic;
-    font-weight: bold;
-    color: red;
+.title {
+  position: absolute;
+  font-size: 72px;
+  font-style: italic;
+  font-weight: bold;
+  color: red;
 }
