@@ -6,26 +6,22 @@ const Navigation = () => {
   return (
     <nav className={classes.nav}>
       <img className={classes.logo} src={Logo} alt="Logo" />
-      <div className={classes.nav_wrapper}>
-        <Link to="/" className={classes.link}>
-          IDC_
-        </Link>
-      </div>
-      <div className={classes.nav_wrapper}>
-        <Link to="/store" className={classes.link}>
-          Store
-        </Link>
-      </div>
-      <div className={classes.nav_wrapper}>
-        <Link to="/social" className={classes.link}>
-          Social
-        </Link>
-      </div>
-      <div className={classes.nav_wrapper}>
-        <Link to="/vlogs" className={classes.link}>
-          Vlogs
-        </Link>
-      </div>
+
+      <Link to="/" className={classes.link}>
+        IDC_
+      </Link>
+
+      <Link to="/store" className={classes.link}>
+        Store
+      </Link>
+
+      <Link to="/social" className={classes.link}>
+        Social
+      </Link>
+
+      <Link to="/vlogs" className={classes.link}>
+        Vlogs
+      </Link>
     </nav>
   );
 };

@@ -1,0 +1,24 @@
+.vlog_link {
+  color: red;
+}
+
+.vlogs_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.hr {
+  width: 200px;
+  border: solid red;
+}
+
+.vlogs_link_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

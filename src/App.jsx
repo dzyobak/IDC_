@@ -5,23 +5,25 @@ import Store from "../src/pages/Store/Store";
 import Social from "../src/pages/Social/Social";
 import Vlogs from "../src/pages/Vlogs/Vlogs";
 import Navigation from "../src/components/Navigation/Navigation";
+import Order from "./pages/Order/Order";
 
 function App() {
   return (
     <>
       <div className="container">
         <div className="layout">
-      <header>
-        <Navigation />
-      </header>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/store" element={<Store />} />
-        <Route path="/social" element={<Social />} />
-        <Route path="/vlogs" element={<Vlogs />} />
-      </Routes>
-      </div>
+          <header>
+            <Navigation />
+          </header>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/store" element={<Store />} />
+            <Route path="/social" element={<Social />} />
+            <Route path="/vlogs" element={<Vlogs />} />
+            <Route path="/order/:productId" element={<Order />} />
+          </Routes>
         </div>
+      </div>
     </>
   );
 }
