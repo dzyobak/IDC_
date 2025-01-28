@@ -1,6 +1,65 @@
-.store_wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+/* Основний контейнер */
+.container {
+  width: 100%;
+  max-width: 1200px; /* Максимальна ширина контейнера */
+  margin: 0 auto; /* Центрування контейнера */
+  padding: 20px; /* Відступи всередині контейнера */
+  box-sizing: border-box; /* Щоб padding не додавався до ширини */
+}
+
+/* Сітка для продуктів */
+.productGrid {
   margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /* Гнучкі колонки */
+  gap: 10px; /* Відступ між картками */
+}
+
+/* Стилі для картки продукту */
+.productCard {
+  /* background-color: #ffffff; */
+  border: 1px solid red;
+
+  padding: 10px;
+  text-align: center;
+}
+
+/* Стилі для зображення продукту */
+.productImage {
+  width: 100%;
+  height: auto;
+
+  margin-bottom: 10px;
+}
+
+/* Стилі для тексту */
+.productCard h3 {
+  margin: 0 0 10px;
+  font-size: 1.2em;
+  color: #000;
+}
+
+.productCard p {
+  margin: 0 0 10px;
+  font-size: 1em;
+  color: red;
+}
+
+/* Стилі для кнопки */
+.orderButton {
+  background-color: transparent;
+  color: red;
+  border: 1px solid red;
+  padding: 8px 16px;
+
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.title {
+  color: red;
+  font-size: 24px;
 }

@@ -6,7 +6,7 @@ const Vlogs = () => {
       <hr className={classes.hr} />
       <div className={classes.vlogs_link_wrapper}>
         <a
-          href="https://www.instagram.com/dzyobak/"
+          href="https://www.youtube.com/@ihorihorihorihorihorihor"
           target="_blank"
           className={classes.vlog_link}
         >

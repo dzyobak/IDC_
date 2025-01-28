@@ -1,0 +1,52 @@
+.container {
+  color: white;
+  background-color: #8b0000; /* Dark Red */
+  padding: 20px;
+  border: 2px solid #ff4d4d; /* Lighter Red Border */
+  max-width: 400px;
+  margin: 20px auto;
+  /* box-shadow: 2px 2px 8px rgba(255, 0, 0, 0.5); */
+}
+
+.heading {
+  font-size: 24px;
+  text-align: center;
+  color: #ffcccc; /* Light Red */
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 0px #660000; /* Shadow for depth */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  font-family: "EB Garamond", serif;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ff4d4d;
+  border-radius: 2px;
+  background-color: #fff5f5; /* Subtle light background */
+  color: #8b0000;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #ff0000; /* Bright Red for focus */
+}
+
+.button {
+  font-family: "EB Garamond", serif;
+  padding: 10px;
+  background-color: #ff4d4d; /* Bright Red */
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #e60000; /* Darker Bright Red */
+}

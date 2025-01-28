@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
+import classes from "./Order.module.css";
 
 const Order = () => {
   const { productId } = useParams();
@@ -27,19 +28,20 @@ const Order = () => {
       alert("Замовлення успішно створено!");
       navigate("/");
     } catch (error) {
-      console.error("Помилка при створенні замовлення: ", error);
+      console.error("Помилка створення замовлення: ", error);
     }
   };
 
   return (
-    <div>
-      <h1>Замовлення товару</h1>
-      <form onSubmit={handleSubmit}>
+    <div className={classes.container}>
+      <h1 className={classes.heading}>Оформлення товару</h1>
+      <form onSubmit={handleSubmit} className={classes.form}>
         <input
           type="text"
           placeholder="Місто"
           value={formData.city}
           onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+          className={classes.input}
           required
         />
         <input
@@ -49,13 +51,15 @@ const Order = () => {
           onChange={(e) =>
             setFormData({ ...formData, postalCode: e.target.value })
           }
+          className={classes.input}
           required
         />
         <input
           type="text"
-          placeholder="Вулиця"
+          placeholder="Вулиця (Нова Пошта)"
           value={formData.street}
           onChange={(e) => setFormData({ ...formData, street: e.target.value })}
+          className={classes.input}
           required
         />
         <input
@@ -65,6 +69,7 @@ const Order = () => {
           onChange={(e) =>
             setFormData({ ...formData, firstName: e.target.value })
           }
+          className={classes.input}
           required
         />
         <input
@@ -74,6 +79,7 @@ const Order = () => {
           onChange={(e) =>
             setFormData({ ...formData, lastName: e.target.value })
           }
+          className={classes.input}
           required
         />
         <input
@@ -81,16 +87,20 @@ const Order = () => {
           placeholder="Номер телефону"
           value={formData.phone}
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+          className={classes.input}
           required
         />
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Електронна пошта"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          className={classes.input}
           required
         />
-        <button type="submit">Підтвердити замовлення</button>
+        <button type="submit" className={classes.button}>
+          Підтвердити замовлення
+        </button>
       </form>
     </div>
   );

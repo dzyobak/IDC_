@@ -6,6 +6,7 @@ import Social from "../src/pages/Social/Social";
 import Vlogs from "../src/pages/Vlogs/Vlogs";
 import Navigation from "../src/components/Navigation/Navigation";
 import Order from "./pages/Order/Order";
+import MusicPlayer from "../src/components/MusicPlayer/MusicPlayer";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <div className="layout">
           <header>
             <Navigation />
+            {/* <MusicPlayer /> */}
           </header>
           <Routes>
             <Route path="/" element={<Home />} />

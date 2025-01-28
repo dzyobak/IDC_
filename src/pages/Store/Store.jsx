@@ -1,28 +1,55 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import classes from "./Store.module.css"; // Імпортуємо CSS Module
 
 const Store = () => {
   const products = [
-    { id: 1, name: "Product 1", price: 100 },
-    { id: 2, name: "Product 2", price: 200 },
-    { id: 3, name: "Product 3", price: 400 },
-    { id: 4, name: "Product 4", price: 350 },
-    { id: 5, name: "Product 5", price: 450 },
+    {
+      id: 1,
+      name: "Худі `Адмін`",
+      price: 1200,
+      image: "https://kappa.lol/0-aYY",
+    },
+    {
+      id: 2,
+      name: "Джинси `81600`",
+      price: 1500,
+      image: "https://kappa.lol/gXbR3",
+    },
+    {
+      id: 3,
+      name: "Футболка `Квартира`",
+      price: 400,
+      image: "https://kappa.lol/3hvdH",
+    },
+    {
+      id: 4,
+      name: "Термогорнятко `Я ❤️ Миколаївського Палія`",
+      price: 400,
+      image: "https://kappa.lol/84YES",
+    },
+    // Додайте інші продукти...
   ];
 
   return (
-    <div>
-      <h1>Our Store:</h1>
-      <ul>
+    <div className={classes.container}>
+      <h1 className={classes.title}>Базар:</h1>
+      <div className={classes.productGrid}>
         {products.map((product) => (
-          <li key={product.id}>
-            {product.name} - {product.price} грн
+          <div key={product.id} className={classes.productCard}>
+            <img
+              src={product.image}
+              alt={product.name}
+              className={classes.productImage}
+            />
+            <h3>{product.name}</h3>
+            <p>{product.price}грн</p>
             <Link to={`/order/${product.id}`}>
-              <button>Order!</button>
+              <button className={classes.orderButton}>Купити!</button>
             </Link>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
