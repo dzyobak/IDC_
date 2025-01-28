@@ -7,7 +7,7 @@ const Navigation = () => {
   return (
     <nav className={classes.nav}>
       <img className={classes.logo} src={Logo} alt="Logo" />
-      <Link to="/" className={classes.link}>
+      <Link to="/IDC_/" className={classes.link}>
         81600
       </Link>
 
