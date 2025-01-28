@@ -1,18 +1,17 @@
 .home_wrapper {
   display: flex;
-  flex-direction: column; /* Змінюємо розташування на колонку для мобільних */
+  flex-direction: column; /* Залишаємо колонкове розташування */
   align-items: center;
-  justify-content: center;
-  height: 100vh;
-  padding: 20px; /* Додаємо відступи для мобільних */
+  justify-content: flex-start; /* Замінили center на flex-start, щоб елементи не були в центрі */
+  min-height: 100vh; /* Замінили height на min-height, щоб уникнути обрізання */
+  padding: 20px; /* Відступи для мобільних */
   text-align: center;
 }
 
 .photo {
-  width: 90%; /* Робимо картинку гнучкою */
-  max-width: 600px; /* Але не більше 600px на великих екранах */
+  width: 100%; /* Розтягуємо зображення на всю ширину контейнера */
+  max-width: 600px; /* Максимальна ширина зображення для великих екранів */
   height: auto; /* Автоматична висота для збереження пропорцій */
-  margin-top: 20px;
 }
 
 .text_container {
@@ -43,5 +42,10 @@
 
   .sub_title {
     font-size: 24px;
+  }
+
+  .photo {
+    width: 100%; /* Зображення займає всю ширину екрану на мобільних */
+    max-width: 100%; /* Забираємо обмеження по максимальній ширині */
   }
 }
