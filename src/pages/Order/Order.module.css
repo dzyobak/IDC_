@@ -1,3 +1,4 @@
+/* Основні стилі для великих екранів */
 .container {
   color: white;
   background-color: #8b0000; /* Dark Red */
@@ -49,4 +50,31 @@
 
 .button:hover {
   background-color: #e60000; /* Darker Bright Red */
+}
+
+/* Адаптивні стилі для мобільних пристроїв */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px; /* Зменшуємо відступи для мобільних */
+    width: 90%; /* Ширина контейнера більше на малих екранах */
+  }
+
+  .heading {
+    font-size: 20px; /* Зменшуємо шрифт для мобільних */
+    margin-bottom: 15px;
+  }
+
+  .input {
+    padding: 12px; /* Збільшуємо внутрішні відступи для комфорту */
+    font-size: 16px; /* Збільшуємо шрифт для полів введення */
+  }
+
+  .button {
+    padding: 12px;
+    font-size: 16px; /* Збільшуємо шрифт кнопки */
+  }
+
+  .form {
+    gap: 12px; /* Додаємо проміжок між полями */
+  }
 }

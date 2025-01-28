@@ -28,7 +28,6 @@ const Store = () => {
       price: 400,
       image: "https://kappa.lol/84YES",
     },
-    // Додайте інші продукти...
   ];
 
   return (
@@ -42,8 +41,8 @@ const Store = () => {
               alt={product.name}
               className={classes.productImage}
             />
-            <h3>{product.name}</h3>
-            <p>{product.price}грн</p>
+            <h3 className={classes.productName}>{product.name}</h3>
+            <p className={classes.productPrice}>{product.price} грн</p>
             <Link to={`/order/${product.id}`}>
               <button className={classes.orderButton}>Купити!</button>
             </Link>

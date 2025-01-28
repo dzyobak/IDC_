@@ -18,7 +18,7 @@ function App() {
             {/* <MusicPlayer /> */}
           </header>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/IDC_/" element={<Home />} />
             <Route path="/store" element={<Store />} />
             <Route path="/social" element={<Social />} />
             <Route path="/vlogs" element={<Vlogs />} />
