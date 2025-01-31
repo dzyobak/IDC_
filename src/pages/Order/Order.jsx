@@ -78,7 +78,9 @@ const Order = () => {
               <option value="L">L</option>
             </select>
           </div>
-          <h3 className={classes.description}>DESCRIPTION:</h3>
+          <h3 className={classes.description}>
+            DESCRIPTION: {product.description}
+          </h3>
         </div>
       </div>
       <div className={classes.order_form_wrapper}>

@@ -9,6 +9,7 @@ const AdminPage = () => {
     name: "",
     price: "",
     image: "", // Зберігаємо URL фото
+    description: "",
   });
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -26,20 +27,26 @@ const AdminPage = () => {
 
   // Функція для додавання нового продукту
   const handleAddProduct = async () => {
-    if (newProduct.name && newProduct.price && newProduct.image) {
+    if (
+      newProduct.name &&
+      newProduct.price &&
+      newProduct.image &&
+      newProduct.description
+    ) {
       try {
-        // Створюємо об'єкт продукту
+        // Створюємо об'єкт продукту з усіма полями
         const product = {
           name: newProduct.name,
           price: parseFloat(newProduct.price),
           image: newProduct.image, // Використовуємо URL фото
+          description: newProduct.description, // Додаємо опис
         };
 
         // Додаємо продукт до Firestore
         await addProduct(product);
 
         // Очищуємо форму
-        setNewProduct({ name: "", price: "", image: "" });
+        setNewProduct({ name: "", price: "", image: "", description: "" });
         alert("Продукт успішно додано!");
       } catch (error) {
         console.error("Помилка при додаванні продукту: ", error);
@@ -97,6 +104,14 @@ const AdminPage = () => {
           value={newProduct.image}
           onChange={(e) =>
             setNewProduct({ ...newProduct, image: e.target.value })
+          }
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          value={newProduct.description}
+          onChange={(e) =>
+            setNewProduct({ ...newProduct, description: e.target.value })
           }
         />
         <button onClick={handleAddProduct}>Add new product</button>
