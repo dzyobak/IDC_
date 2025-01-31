@@ -1,15 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ProductContext } from "../../contexts/ProductContext"; // Імпортуємо контекст
-import { db } from "../../firebase"; // Імпортуємо db з Firebase
-import { collection, addDoc } from "firebase/firestore"; // Імпортуємо Firestore функції
+import { ProductContext } from "../../contexts/ProductContext";
+import { db } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
 import classes from "./Order.module.css";
 
 const Order = () => {
-  const { productId } = useParams(); // Отримуємо id продукту з URL
+  const { productId } = useParams();
   const navigate = useNavigate();
-  const { products } = useContext(ProductContext); // Отримуємо продукти з контексту
+  const { products } = useContext(ProductContext);
   const [product, setProduct] = useState(null);
+  const [orderSuccess, setOrderSuccess] = useState(false); // Стан для алерту
 
   const [formData, setFormData] = useState({
     city: "",
@@ -23,23 +24,25 @@ const Order = () => {
     size: "S",
   });
 
-  // Знаходимо продукт за productId
   useEffect(() => {
-    const selectedProduct = products.find((p) => p.id === productId); // Знаходимо продукт за id
+    const selectedProduct = products.find((p) => p.id === productId);
     setProduct(selectedProduct);
   }, [productId, products]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Додаємо замовлення до Firestore
       await addDoc(collection(db, "orders"), {
         productId,
         ...formData,
         timestamp: new Date(),
       });
-      alert("Замовлення успішно створено!");
-      navigate("/");
+
+      setOrderSuccess(true); // Показати повноекранний алерт
+      setTimeout(() => {
+        setOrderSuccess(false);
+        navigate("/");
+      }, 2000); // Закрити через 3 секунди і перенаправити
     } catch (error) {
       console.error("Помилка при створенні замовлення: ", error);
       alert("Помилка при створенні замовлення!");
@@ -47,17 +50,30 @@ const Order = () => {
   };
 
   if (!product) {
-    return <div>Loading...</div>; // Повідомлення про завантаження, якщо продукт не знайдено
+    return <div>Loading...</div>;
   }
 
   return (
     <div className={classes.order_wrapper}>
+      {orderSuccess && (
+        <div className={classes.fullscreen_alert}>
+          <h1>Order successfully created!</h1>
+        </div>
+      )}
       <div className={classes.your_order}>
         <h1>YOUR ORDER:</h1>
         <div className={classes.your_order_wrapper}>
           <div className={classes.imgs_wrapper}>
-            <img src={product.image} alt="" className={classes.img} />
-            <img src={product.image} alt="" className={classes.img} />
+            <img
+              src={product.image}
+              alt="Product Images"
+              className={classes.img}
+            />
+            <img
+              src={product.image}
+              alt="Product Images"
+              className={classes.img}
+            />
           </div>
           <h1 className={classes.title}>{product.name}</h1>
           <h2 className={classes.price}>{product.price} USD</h2>
