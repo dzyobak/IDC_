@@ -6,6 +6,7 @@ import Social from "../src/pages/Social/Social";
 import Vlogs from "../src/pages/Vlogs/Vlogs";
 import Navigation from "../src/components/Navigation/Navigation";
 import Order from "./pages/Order/Order";
+import AdminPage from "../src/pages/AdminPages/AdminPages"; // Імпортуємо сторінку адміна
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
             <Route path="/social" element={<Social />} />
             <Route path="/vlogs" element={<Vlogs />} />
             <Route path="/order/:productId" element={<Order />} />
+            <Route path="/admin" element={<AdminPage />} />{" "}
+            {/* Додаємо маршрут для адміна */}
           </Routes>
         </div>
       </div>

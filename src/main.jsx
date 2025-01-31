@@ -4,11 +4,16 @@ import "./index.css";
 import "./reset.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
+import { ProductProvider } from "./contexts/ProductContext.jsx"; // Виправлений шлях
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <StrictMode>
-      <App />
+      <ProductProvider>
+        {" "}
+        {/* Огортаємо App у ProductProvider */}
+        <App />
+      </ProductProvider>
     </StrictMode>
   </BrowserRouter>
 );

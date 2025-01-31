@@ -1,0 +1,80 @@
+.admin_wrapper {
+  padding: 20px;
+  max-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.add_product_form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%; /* Ширина форми */
+  max-width: 400px; /* Максимальна ширина форми */
+}
+
+.add_product_form input {
+  all: unset;
+  border: 2px solid black;
+  width: 100%; /* Ширина інпутів */
+  padding: 10px;
+  border-radius: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.add_product_form button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%; /* Ширина кнопки */
+}
+
+.add_product_form button:hover {
+  background-color: #000;
+}
+
+.enter_password_input_text {
+  margin-bottom: 10px;
+}
+
+.hr {
+  width: 400px;
+  border: 2px solid black;
+}
+
+.hr2 {
+  width: 400px;
+  border: 2px solid black;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.admin_wrapper input {
+  all: unset;
+  border: 2px solid black;
+  width: 100%; /* Ширина інпутів */
+  padding: 10px;
+  border-radius: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.login_button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%; /* Ширина кнопки */
+  margin-top: 10px;
+}
+
+.login_button:hover {
+  background-color: #000;
+}

@@ -1,28 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { ProductContext } from "../../contexts/ProductContext"; // Імпортуємо контекст
 import classes from "./Store.module.css";
 
 const Store = () => {
-  const products = [
-    {
-      id: 1,
-      name: "UZI BARTER16",
-      price: 100,
-      image: "https://kappa.lol/To-pe",
-    },
-    {
-      id: 2,
-      name: "THUGG BARTER6",
-      price: 200,
-      image: "https://kappa.lol/fAEmh",
-    },
-    {
-      id: 3,
-      name: "SAW",
-      price: 150,
-      image: "https://kappa.lol/dIPD2",
-    },
-  ];
+  const { products } = useContext(ProductContext); // Отримуємо продукти з контексту
 
   return (
     <div className={classes.store_wrapper}>
@@ -38,6 +20,7 @@ const Store = () => {
               <h2 className={classes.product_name}>{product.name}</h2>
               <p className={classes.product_price}>{product.price} USD</p>
             </div>
+            {/* Передача id продукту через URL */}
             <Link to={`/order/${product.id}`}>
               <button className={classes.order_button}>ORDER!</button>
             </Link>

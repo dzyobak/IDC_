@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { db } from "../../firebase";
-import { collection, doc, getDoc, addDoc } from "firebase/firestore";
+import { ProductContext } from "../../contexts/ProductContext"; // Імпортуємо контекст
+import { db } from "../../firebase"; // Імпортуємо db з Firebase
+import { collection, addDoc } from "firebase/firestore"; // Імпортуємо Firestore функції
 import classes from "./Order.module.css";
 
 const Order = () => {
-  const { productId } = useParams();
+  const { productId } = useParams(); // Отримуємо id продукту з URL
   const navigate = useNavigate();
+  const { products } = useContext(ProductContext); // Отримуємо продукти з контексту
   const [product, setProduct] = useState(null);
+
   const [formData, setFormData] = useState({
     city: "",
     country: "",
@@ -20,24 +23,16 @@ const Order = () => {
     size: "S",
   });
 
-  // Завантажуємо товар з Firestore
+  // Знаходимо продукт за productId
   useEffect(() => {
-    const fetchProduct = async () => {
-      const docRef = doc(db, "products", productId);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setProduct(docSnap.data());
-      } else {
-        console.log("Товар не знайдено");
-      }
-    };
-
-    fetchProduct();
-  }, [productId]);
+    const selectedProduct = products.find((p) => p.id === productId); // Знаходимо продукт за id
+    setProduct(selectedProduct);
+  }, [productId, products]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Додаємо замовлення до Firestore
       await addDoc(collection(db, "orders"), {
         productId,
         ...formData,
@@ -47,11 +42,12 @@ const Order = () => {
       navigate("/");
     } catch (error) {
       console.error("Помилка при створенні замовлення: ", error);
+      alert("Помилка при створенні замовлення!");
     }
   };
 
   if (!product) {
-    return <h1>Завантаження товару...</h1>;
+    return <div>Loading...</div>; // Повідомлення про завантаження, якщо продукт не знайдено
   }
 
   return (
@@ -60,17 +56,16 @@ const Order = () => {
         <h1>YOUR ORDER:</h1>
         <div className={classes.your_order_wrapper}>
           <div className={classes.imgs_wrapper}>
-            <img
-              src={product.image}
-              alt={product.name}
-              className={classes.img}
-            />
+            <img src={product.image} alt="" className={classes.img} />
+            <img src={product.image} alt="" className={classes.img} />
           </div>
           <h1 className={classes.title}>{product.name}</h1>
           <h2 className={classes.price}>{product.price} USD</h2>
           <div>
             <h2 className={classes.choose_size_text}>CHOOSE YOUR SIZE</h2>
             <select
+              name="size"
+              id="size"
               className={classes.choose_size}
               value={formData.size}
               onChange={(e) =>
@@ -83,7 +78,7 @@ const Order = () => {
               <option value="L">L</option>
             </select>
           </div>
-          <h3 className={classes.description}>{product.description}</h3>
+          <h3 className={classes.description}>DESCRIPTION:</h3>
         </div>
       </div>
       <div className={classes.order_form_wrapper}>
