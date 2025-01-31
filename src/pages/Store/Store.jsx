@@ -1,28 +1,43 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import classes from "./Store.module.css";
 
 const Store = () => {
   const products = [
-    { id: 1, name: "Product 1", price: 100 },
-    { id: 2, name: "Product 2", price: 200 },
-    { id: 3, name: "Product 3", price: 400 },
-    { id: 4, name: "Product 4", price: 350 },
-    { id: 5, name: "Product 5", price: 450 },
+    {
+      id: 1,
+      name: "UZI BARTER16",
+      price: 100,
+      image: "https://kappa.lol/To-pe",
+    },
+    {
+      id: 2,
+      name: "THUGG BARTER6",
+      price: 200,
+      image: "https://kappa.lol/fAEmh",
+    },
   ];
 
   return (
-    <div>
-      <h1>Our Store:</h1>
-      <ul>
+    <div className={classes.store_wrapper}>
+      <div className={classes.product_grid}>
         {products.map((product) => (
-          <li key={product.id}>
-            {product.name} - {product.price} грн
+          <div key={product.id} className={classes.product_card}>
+            <img
+              src={product.image}
+              alt={product.name}
+              className={classes.product_image}
+            />
+            <div className={classes.product_info}>
+              <h2 className={classes.product_name}>{product.name}</h2>
+              <p className={classes.product_price}>{product.price} USD</p>
+            </div>
             <Link to={`/order/${product.id}`}>
-              <button>Order!</button>
+              <button className={classes.order_button}>ORDER!</button>
             </Link>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

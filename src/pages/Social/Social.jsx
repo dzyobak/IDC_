@@ -5,7 +5,7 @@ const Social = () => {
     <div className={classes.social_wrapper}>
       <hr className={classes.hr} />
       <div className={classes.social_link_wrapper}>
-        <a
+        {/* <a
           href="https://www.instagram.com/dzyobak/"
           target="_blank"
           className={classes.soc_link}
@@ -35,7 +35,7 @@ const Social = () => {
           className={classes.soc_link}
         >
           Instagram4
-        </a>
+        </a> */}
       </div>
       <hr className={classes.hr} />
     </div>

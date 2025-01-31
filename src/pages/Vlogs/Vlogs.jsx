@@ -5,13 +5,13 @@ const Vlogs = () => {
     <div className={classes.vlogs_wrapper}>
       <hr className={classes.hr} />
       <div className={classes.vlogs_link_wrapper}>
-        <a
+        {/* <a
           href="https://www.instagram.com/dzyobak/"
           target="_blank"
           className={classes.vlog_link}
         >
           VLOGS!
-        </a>
+        </a> */}
       </div>
       <hr className={classes.hr} />
     </div>

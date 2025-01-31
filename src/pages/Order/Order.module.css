@@ -1,0 +1,64 @@
+/* Order.module.css */
+.order_wrapper {
+  display: flex;
+  margin-top: 20px;
+}
+
+.order_form_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: ce;
+  flex-direction: column;
+  width: 600px;
+}
+
+/* your oder  */
+
+.your_order {
+  width: 600px;
+  height: 490;
+  margin-left: 10px;
+}
+
+/* your oder  */
+
+.form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input {
+  all: unset;
+  border: 2px solid black;
+  width: 300px;
+  padding: 5px;
+  margin: 10px 0;
+  border-radius: 0; /* Remove border-radius */
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+button {
+  font-family: "Cherry Cream Soda", serif;
+  width: 300px;
+  padding: 10px;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: red;
+}
+
+button:hover {
+  background-color: black;
+}
+
+.check_out_text {
+  width: 300px;
+}
+
+.hr {
+  width: 300px;
+  border: 2px solid black;
+}

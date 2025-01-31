@@ -5,7 +5,9 @@ import Logo from "../../assets/logo3_BW.jpeg";
 const Navigation = () => {
   return (
     <nav className={classes.nav}>
-      <img className={classes.logo} src={Logo} alt="Logo" />
+      <Link to="/">
+        <img className={classes.logo} src={Logo} alt="Logo" />
+      </Link>
 
       <Link to="/" className={classes.link}>
         IDC_
