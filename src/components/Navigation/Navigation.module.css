@@ -16,6 +16,10 @@
   font-family: "Cherry Cream Soda", serif;
 }
 
+.link:hover {
+  color: black;
+}
+
 .logo {
   padding-right: 10px;
   width: 150px;
