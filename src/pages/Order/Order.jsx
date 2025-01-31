@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, doc, getDoc, addDoc } from "firebase/firestore";
 import classes from "./Order.module.css";
 
 const Order = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
+  const [product, setProduct] = useState(null);
   const [formData, setFormData] = useState({
     city: "",
     country: "",
@@ -16,7 +17,23 @@ const Order = () => {
     lastName: "",
     phone: "",
     email: "",
+    size: "S",
   });
+
+  // Завантажуємо товар з Firestore
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const docRef = doc(db, "products", productId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setProduct(docSnap.data());
+      } else {
+        console.log("Товар не знайдено");
+      }
+    };
+
+    fetchProduct();
+  }, [productId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,10 +50,41 @@ const Order = () => {
     }
   };
 
+  if (!product) {
+    return <h1>Завантаження товару...</h1>;
+  }
+
   return (
     <div className={classes.order_wrapper}>
       <div className={classes.your_order}>
         <h1>YOUR ORDER:</h1>
+        <div className={classes.your_order_wrapper}>
+          <div className={classes.imgs_wrapper}>
+            <img
+              src={product.image}
+              alt={product.name}
+              className={classes.img}
+            />
+          </div>
+          <h1 className={classes.title}>{product.name}</h1>
+          <h2 className={classes.price}>{product.price} USD</h2>
+          <div>
+            <h2 className={classes.choose_size_text}>CHOOSE YOUR SIZE</h2>
+            <select
+              className={classes.choose_size}
+              value={formData.size}
+              onChange={(e) =>
+                setFormData({ ...formData, size: e.target.value })
+              }
+              required
+            >
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+            </select>
+          </div>
+          <h3 className={classes.description}>{product.description}</h3>
+        </div>
       </div>
       <div className={classes.order_form_wrapper}>
         <h1 className={classes.check_out_text}>CHECK OUT:</h1>

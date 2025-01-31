@@ -1,8 +1,4 @@
-.vlog_link {
-  color: red;
-}
-
-.vlogs_wrapper {
+.wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,15 +6,15 @@
 }
 
 .hr {
-  width: 200px;
-  border: solid red;
+  width: 300px;
+  border: 2px solid black;
+  margin-bottom: 0;
 }
 
-.vlogs_link_wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  margin-top: 10px;
-  margin-bottom: 10px;
+.link_wrapper {
+  margin-top: 8px;
+}
+
+.link {
+  color: #640000;
 }

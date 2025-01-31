@@ -16,6 +16,12 @@ const Store = () => {
       price: 200,
       image: "https://kappa.lol/fAEmh",
     },
+    {
+      id: 3,
+      name: "SAW",
+      price: 150,
+      image: "https://kappa.lol/dIPD2",
+    },
   ];
 
   return (
