@@ -14,15 +14,15 @@ const Navigation = () => {
       </Link>
 
       <Link to="/store" className={classes.link}>
-        Store
+        STORE
       </Link>
 
       <Link to="/social" className={classes.link}>
-        Social
+        SOCIAL
       </Link>
 
       <Link to="/vlogs" className={classes.link}>
-        Vlogs
+        VLOGS
       </Link>
     </nav>
   );

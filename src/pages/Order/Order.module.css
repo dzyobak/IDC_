@@ -133,3 +133,8 @@ button:hover {
 .fullscreen_alert h1 {
   font-family: "Cherry Cream Soda", serif;
 }
+
+.description_text {
+  color: #000;
+  margin-top: 5px;
+}

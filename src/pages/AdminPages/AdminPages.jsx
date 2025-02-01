@@ -2,26 +2,30 @@ import React, { useState, useContext } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import classes from "./AdminPage.module.css";
 import { useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; // Імпортуємо Firebase Authentication
 
 const AdminPage = () => {
   const { addProduct } = useContext(ProductContext);
   const [newProduct, setNewProduct] = useState({
     name: "",
     price: "",
-    image: "", // Зберігаємо URL фото
+    image: "",
     description: "",
   });
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(""); // Емейл для входу
+  const [password, setPassword] = useState(""); // Пароль для входу
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
+  const auth = getAuth(); // Отримуємо об'єкт автентифікації
 
-  // Функція для перевірки пароля
-  const checkPassword = () => {
-    if (password === "123") {
+  // Функція для входу
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password); // Вхід через Firebase
       setIsAuthenticated(true);
-    } else {
-      alert("Невірний пароль!");
-      navigate("/");
+    } catch (error) {
+      console.error("Помилка входу: ", error);
+      alert("Невірний емейл або пароль!");
     }
   };
 
@@ -34,18 +38,14 @@ const AdminPage = () => {
       newProduct.description
     ) {
       try {
-        // Створюємо об'єкт продукту з усіма полями
         const product = {
           name: newProduct.name,
           price: parseFloat(newProduct.price),
-          image: newProduct.image, // Використовуємо URL фото
-          description: newProduct.description, // Додаємо опис
+          image: newProduct.image,
+          description: newProduct.description,
         };
 
-        // Додаємо продукт до Firestore
         await addProduct(product);
-
-        // Очищуємо форму
         setNewProduct({ name: "", price: "", image: "", description: "" });
         alert("Продукт успішно додано!");
       } catch (error) {
@@ -57,19 +57,27 @@ const AdminPage = () => {
     }
   };
 
-  // Якщо користувач не автентифікований, показуємо форму для введення пароля
+  // Якщо користувач не автентифікований, показуємо форму для входу
   if (!isAuthenticated) {
     return (
       <div className={classes.admin_wrapper}>
-        <h1 className={classes.enter_password_input_text}>Enter Password</h1>
+        <h1 className={classes.enter_password_input_text}>ADMIN LOG IN</h1>
         <hr className={classes.hr2} />
         <input
+          className={classes.password_input}
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          className={classes.password_input}
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={checkPassword} className={classes.login_button}>
+        <button onClick={handleLogin} className={classes.login_button}>
           Log In
         </button>
       </div>
@@ -80,8 +88,9 @@ const AdminPage = () => {
   return (
     <div className={classes.admin_wrapper}>
       <div className={classes.add_product_form}>
-        <h1>Admin Panel</h1>
-        <h2>Add new staff</h2>
+        <h1>ADMIN PANEL</h1>
+        <hr className={classes.hr} />
+        <h2>ADD NEW STAFF</h2>
         <input
           type="text"
           placeholder="Product name"

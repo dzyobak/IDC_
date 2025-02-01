@@ -45,6 +45,7 @@
 .hr {
   width: 400px;
   border: 2px solid black;
+  margin: 0;
 }
 
 .hr2 {
@@ -62,6 +63,7 @@
   border-radius: 0;
   box-sizing: border-box;
   font-size: 1rem;
+  margin-bottom: 10px;
 }
 
 .login_button {
@@ -72,7 +74,6 @@
   border: none;
   cursor: pointer;
   width: 100%; /* Ширина кнопки */
-  margin-top: 10px;
 }
 
 .login_button:hover {

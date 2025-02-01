@@ -95,7 +95,8 @@ const Order = () => {
             </select>
           </div>
           <h3 className={classes.description}>
-            DESCRIPTION: {product.description}
+            DESCRIPTION:
+            <h4 className={classes.description_text}>{product.description}</h4>
           </h3>
         </div>
       </div>
