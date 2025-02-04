@@ -21,9 +21,9 @@ const Navigation = () => {
         SOCIAL
       </Link>
 
-      <Link to="/vlogs" className={classes.link}>
+      {/* <Link to="/vlogs" className={classes.link}>
         VLOGGGS
-      </Link>
+      </Link> */}
     </nav>
   );
 };

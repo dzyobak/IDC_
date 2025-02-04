@@ -1,6 +1,7 @@
 .nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 150px;
   background-image: linear-gradient(#fff, #a2a4a7);
   padding: 10px;
