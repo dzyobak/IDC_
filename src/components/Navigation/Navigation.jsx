@@ -22,7 +22,7 @@ const Navigation = () => {
       </Link>
 
       <Link to="/vlogs" className={classes.link}>
-        VLOGS
+        VLOGGGS
       </Link>
     </nav>
   );
