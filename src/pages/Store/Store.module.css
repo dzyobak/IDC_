@@ -6,9 +6,67 @@
   justify-content: center;
 }
 
+.cart_button {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.close_button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.close_button:hover {
+  color: red; /* Колір при наведенні */
+}
+
+.cart_sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background-color: #fff;
+  border-left: 2px solid #ccc;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 200;
+  overflow-y: auto;
+}
+
+.cart_sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.cart_sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart_sidebar button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .product_grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 колонки в рядку */
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
   justify-content: flex-start;
 }
@@ -70,6 +128,133 @@
   font-weight: bold;
 }
 
+.add_to_cart_button {
+  width: 100%;
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.add_to_cart_button:hover {
+  background-color: #000;
+}
+
 a {
   text-decoration: none;
+}
+
+.button_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove_button {
+  background: none; /* Прибираємо фон */
+  color: black; /* Колір тексту */
+  font-size: 16px; /* Розмір шрифта */
+  padding: 0; /* Видаляємо паддінг */
+  margin: 0; /* Видаляємо маргін */
+  border: none; /* Прибираємо бордер */
+  cursor: pointer; /* Вказівник на кнопці */
+}
+
+.remove_button:hover {
+  background: none; /* Прибираємо hover ефекти */
+}
+
+.cart_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.add_button {
+  background-color: red;
+  border: 1px solid #ccc;
+  padding: 3px 6px; /* Зменшення розміру кнопок */
+  font-size: 12px; /* Зменшення шрифта */
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.add_button {
+  background-color: #d4edda;
+}
+
+.total_amount {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.decrement_button,
+.increment_button {
+  background: none;
+  color: black;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+/* .decrement_button:hover {
+  background-color: none;
+}
+
+.increment_button:hover {
+  background-color: none;
+} */
+
+.quantity_input {
+  all: unset;
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  font-size: 16px;
+  margin: 0 5px;
+}
+
+/* Прибираємо стрілочки в полі вводу */
+.quantity_input::-webkit-outer-spin-button,
+.quantity_input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity_input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Стилізація для кнопок + і - */
+.decrement_button,
+.increment_button {
+  background: none;
+  color: black;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  border: none; /* Видаляємо border */
+}
+
+.decrement_button:hover,
+.increment_button:hover {
+  background: none; /* Забираємо стилі hover */
+}
+
+.cart_sidebar_upper {
+  display: flex;
+  align-items: center;
 }

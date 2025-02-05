@@ -1,5 +1,7 @@
 import "./App.css";
 import { Router, Route, Routes } from "react-router-dom";
+import { CartProvider } from "./contexts/CartContext"; // Імпортуємо CartProvider
+import Cart from "./components/Cart/Cart"; // Імпортуємо Cart
 import Home from "../src/pages/Home/Home";
 import Store from "../src/pages/Store/Store";
 import Social from "../src/pages/Social/Social";
@@ -16,15 +18,18 @@ function App() {
           <header>
             <Navigation />
           </header>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/store" element={<Store />} />
-            <Route path="/social" element={<Social />} />
-            <Route path="/vlogs" element={<Vlogs />} />
-            <Route path="/order/:productId" element={<Order />} />
-            <Route path="/admin" element={<AdminPage />} />{" "}
-            {/* Додаємо маршрут для адміна */}
-          </Routes>
+          <CartProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/store" element={<Store />} />
+              <Route path="/social" element={<Social />} />
+              <Route path="/vlogs" element={<Vlogs />} />
+              <Route path="/order/:productId" element={<Order />} />
+              <Route path="/admin" element={<AdminPage />} />{" "}
+              <Route path="/cart" element={<Cart />} />
+              {/* Додаємо маршрут для адміна */}
+            </Routes>
+          </CartProvider>
         </div>
       </div>
     </>
