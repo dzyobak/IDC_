@@ -10,7 +10,6 @@
   background-color: red;
   color: white;
   padding: 10px 20px;
-  margin: 20px;
   cursor: pointer;
   font-size: 16px;
   border: none;
@@ -155,17 +154,17 @@ a {
 }
 
 .remove_button {
-  background: none; /* Прибираємо фон */
-  color: black; /* Колір тексту */
-  font-size: 16px; /* Розмір шрифта */
-  padding: 0; /* Видаляємо паддінг */
-  margin: 0; /* Видаляємо маргін */
-  border: none; /* Прибираємо бордер */
-  cursor: pointer; /* Вказівник на кнопці */
+  background: none;
+  color: black;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
 }
 
 .remove_button:hover {
-  background: none; /* Прибираємо hover ефекти */
+  background: none;
 }
 
 .cart_item {
@@ -178,8 +177,8 @@ a {
 .add_button {
   background-color: red;
   border: 1px solid #ccc;
-  padding: 3px 6px; /* Зменшення розміру кнопок */
-  font-size: 12px; /* Зменшення шрифта */
+  padding: 3px 6px;
+  font-size: 12px;
   cursor: pointer;
   margin: 0 5px;
 }
@@ -205,14 +204,6 @@ a {
   padding: 0;
   margin: 0;
 }
-
-/* .decrement_button:hover {
-  background-color: none;
-}
-
-.increment_button:hover {
-  background-color: none;
-} */
 
 .quantity_input {
   all: unset;
@@ -246,15 +237,34 @@ a {
   text-align: center;
   padding: 0;
   margin: 0;
-  border: none; /* Видаляємо border */
+  border: none;
 }
 
 .decrement_button:hover,
 .increment_button:hover {
-  background: none; /* Забираємо стилі hover */
+  background: none;
 }
 
 .cart_sidebar_upper {
   display: flex;
   align-items: center;
+}
+
+.cart_item_info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart_item_image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.cart_info_bottom {
+  display: flex;
+  align-items: baseline;
+  margin-left: 10px;
 }

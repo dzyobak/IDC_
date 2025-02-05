@@ -1,44 +1,70 @@
 import React from "react";
-import { useCart } from "../../contexts/CartContext";
-import classes from "./Cart.module.css";
+import { useCart } from "../../contexts/CartContext"; // Імпортуємо useCart
+import classes from "./Cart.module.css"; // Ваш CSS
 
-const Cart = () => {
-  const { cart, removeFromCart } = useCart();
+const Cart = ({ toggleCart }) => {
+  const { cart, removeFromCart, updateQuantity } = useCart(); // Отримуємо кошик і функції для роботи з ним
 
-  const totalPrice = cart.reduce((total, product) => total + product.price, 0);
+  // Функція для обчислення загальної суми кошика
+  const calculateTotal = () => {
+    const total = cart.reduce(
+      (total, item) => total + (Number(item.price) || 0) * item.quantity,
+      0
+    );
+    return total.toFixed(2);
+  };
 
   return (
-    <div className={classes.cart_wrapper}>
-      <h1>Your Cart</h1>
-      <div className={classes.cart_items}>
-        {cart.length === 0 ? (
-          <p>Your cart is empty</p>
-        ) : (
-          cart.map((product) => (
-            <div key={product.id} className={classes.cart_item}>
-              <img
-                src={product.image}
-                alt={product.name}
-                className={classes.cart_item_image}
+    <div className={classes.cart_sidebar}>
+      <span className={classes.close_button} onClick={toggleCart}>
+        ×
+      </span>{" "}
+      {/* Хрестик для закриття */}
+      <h2>Your Cart</h2>
+      {cart.length === 0 ? (
+        <p>Your cart is empty</p>
+      ) : (
+        <ul>
+          {cart.map((item, index) => (
+            <li key={index} className={classes.cart_item}>
+              <p>
+                {item.name} - ${item.price} x {item.quantity}
+              </p>
+              {/* Кнопки для зменшення та збільшення кількості продукту */}
+              <button
+                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                className={classes.decrement_button}
+              >
+                -
+              </button>
+              <input
+                type="number"
+                value={item.quantity}
+                onChange={(e) =>
+                  updateQuantity(item.id, parseInt(e.target.value))
+                }
+                className={classes.quantity_input}
               />
-              <div className={classes.cart_item_info}>
-                <h3>{product.name}</h3>
-                <p>{product.price} USD</p>
-                <button
-                  className={classes.remove_button}
-                  onClick={() => removeFromCart(product.id)}
-                >
-                  Remove
-                </button>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-      <div className={classes.cart_total}>
-        <h3>Total: {totalPrice} USD</h3>
-        <button className={classes.checkout_button}>Checkout</button>
-      </div>
+              <button
+                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                className={classes.increment_button}
+              >
+                +
+              </button>
+
+              {/* Кнопка для видалення продукту з кошика */}
+              <button
+                onClick={() => removeFromCart(item.id)}
+                className={classes.remove_button}
+              >
+                X
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className={classes.total_amount}>Total: ${calculateTotal()}</p>
+      <button onClick={() => alert("Proceed to Checkout")}>Checkout</button>
     </div>
   );
 };
