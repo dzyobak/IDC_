@@ -1,6 +1,13 @@
 import React, { createContext, useState, useEffect } from "react";
 import { db } from "../firebase"; // Імпортуємо Firebase
-import { collection, addDoc, getDocs } from "firebase/firestore"; // Імпортуємо Firestore функції
+import {
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore"; // Імпортуємо Firestore функції
 
 export const ProductContext = createContext();
 
@@ -37,8 +44,42 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  // Функція для оновлення продукту в Firestore
+  const updateProduct = async (id, updatedProduct) => {
+    try {
+      const productRef = doc(db, "products", id); // Отримуємо посилання на продукт
+      await updateDoc(productRef, updatedProduct); // Оновлюємо дані в Firestore
+
+      // Оновлюємо локальний стан
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.id === id ? { ...product, ...updatedProduct } : product
+        )
+      );
+    } catch (error) {
+      console.error("Error updating product: ", error);
+    }
+  };
+
+  // Функція для видалення продукту з Firestore
+  const deleteProduct = async (id) => {
+    try {
+      const productRef = doc(db, "products", id); // Отримуємо посилання на продукт
+      await deleteDoc(productRef); // Видаляємо продукт з Firestore
+
+      // Оновлюємо локальний стан
+      setProducts((prevProducts) =>
+        prevProducts.filter((product) => product.id !== id)
+      );
+    } catch (error) {
+      console.error("Error deleting product: ", error);
+    }
+  };
+
   return (
-    <ProductContext.Provider value={{ products, addProduct }}>
+    <ProductContext.Provider
+      value={{ products, addProduct, updateProduct, deleteProduct }}
+    >
       {children}
     </ProductContext.Provider>
   );

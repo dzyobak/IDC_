@@ -1,77 +1,100 @@
 import React, { useState, useContext } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import classes from "./AdminPage.module.css";
-import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; // Імпортуємо Firebase Authentication
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const AdminPage = () => {
-  const { addProduct } = useContext(ProductContext);
+  const { products, addProduct, updateProduct, deleteProduct } =
+    useContext(ProductContext);
   const [newProduct, setNewProduct] = useState({
     name: "",
     price: "",
     image: "",
     description: "",
   });
-  const [email, setEmail] = useState(""); // Емейл для входу
-  const [password, setPassword] = useState(""); // Пароль для входу
+  const [editProduct, setEditProduct] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const navigate = useNavigate();
-  const auth = getAuth(); // Отримуємо об'єкт автентифікації
+  const auth = getAuth();
 
-  // Функція для входу
+  // Вхід в адмінку
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password); // Вхід через Firebase
+      await signInWithEmailAndPassword(auth, email, password);
       setIsAuthenticated(true);
-    } catch (error) {
-      console.error("Помилка входу: ", error);
+    } catch {
       alert("Невірний емейл або пароль!");
     }
   };
 
-  // Функція для додавання нового продукту
-  const handleAddProduct = async () => {
-    if (
-      newProduct.name &&
-      newProduct.price &&
-      newProduct.image &&
-      newProduct.description
-    ) {
-      try {
-        const product = {
-          name: newProduct.name,
-          price: parseFloat(newProduct.price),
-          image: newProduct.image,
-          description: newProduct.description,
-        };
+  // Зміна полів продукту
+  const handleInputChange = (e) => {
+    setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
+  };
 
-        await addProduct(product);
-        setNewProduct({ name: "", price: "", image: "", description: "" });
-        alert("Продукт успішно додано!");
-      } catch (error) {
-        console.error("Помилка при додаванні продукту: ", error);
-        alert("Помилка при додаванні продукту!");
+  // Додавання або оновлення продукту
+  const handleSaveProduct = async () => {
+    if (Object.values(newProduct).some((field) => !field.trim())) {
+      return alert("Будь ласка, заповніть всі поля!");
+    }
+
+    try {
+      if (editProduct) {
+        await updateProduct(editProduct.id, newProduct);
+        setEditProduct(null);
+      } else {
+        await addProduct({
+          ...newProduct,
+          price: parseFloat(newProduct.price),
+        });
       }
-    } else {
-      alert("Будь ласка, заповніть всі поля!");
+      setNewProduct({ name: "", price: "", image: "", description: "" });
+      alert(editProduct ? "Продукт оновлено!" : "Продукт додано!");
+    } catch {
+      alert("Помилка при збереженні продукту!");
     }
   };
 
-  // Якщо користувач не автентифікований, показуємо форму для входу
+  // Видалення продукту
+  const handleDeleteProduct = async (id) => {
+    try {
+      await deleteProduct(id);
+      alert("Продукт видалено!");
+    } catch {
+      alert("Не вдалося видалити продукт!");
+    }
+  };
+
+  // Заповнення форми для редагування
+  const handleEditClick = (product) => {
+    setEditProduct(product);
+    setNewProduct({ ...product });
+  };
+
+  // Скидання форми для додавання нового продукту
+  const handleAddNewProduct = () => {
+    setEditProduct(null);
+    setNewProduct({
+      name: "",
+      price: "",
+      image: "",
+      description: "",
+    });
+  };
+
   if (!isAuthenticated) {
     return (
       <div className={classes.admin_wrapper}>
         <h1 className={classes.enter_password_input_text}>ADMIN LOG IN</h1>
         <hr className={classes.hr2} />
         <input
-          className={classes.password_input}
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          className={classes.password_input}
           type="password"
           placeholder="Password"
           value={password}
@@ -84,46 +107,78 @@ const AdminPage = () => {
     );
   }
 
-  // Якщо користувач автентифікований, показуємо сторінку адміна
   return (
     <div className={classes.admin_wrapper}>
       <div className={classes.add_product_form}>
         <h1>ADMIN PANEL</h1>
-        <hr className={classes.hr} />
-        <h2>ADD NEW STAFF</h2>
-        <input
-          type="text"
-          placeholder="Product name"
-          value={newProduct.name}
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, name: e.target.value })
-          }
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          value={newProduct.price}
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, price: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="URL to image"
-          value={newProduct.image}
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, image: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          value={newProduct.description}
-          onChange={(e) =>
-            setNewProduct({ ...newProduct, description: e.target.value })
-          }
-        />
-        <button onClick={handleAddProduct}>Add new product</button>
+        {/* <hr className={classes.hr} /> */}
+        <h2>{editProduct ? "EDIT PRODUCT" : "ADD NEW PRODUCT"}</h2>
+
+        {["name", "price", "image", "description"].map((field) => (
+          <input
+            key={field}
+            type={field === "price" ? "number" : "text"}
+            name={field}
+            placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+            value={newProduct[field]}
+            onChange={handleInputChange}
+          />
+        ))}
+
+        <button onClick={handleSaveProduct}>
+          {editProduct ? "UPDATE PRODUCT" : "ADD"}
+        </button>
+        {/* Кнопка для додавання нового продукту */}
+        <button
+          onClick={handleAddNewProduct}
+          className={classes.add_new_product_button}
+        >
+          ADD NEW PRODUCT!
+        </button>
+      </div>
+      {/* Список продуктів */}
+      <div className={classes.product_list}>
+        <h2>PRODUCT LIST</h2>
+        {/* <hr className={classes.hr2} /> */}
+        <table className={classes.product_table}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Image</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product) => (
+              <tr key={product.id}>
+                <td>{product.name}</td>
+                <td>{product.price} USD</td>
+                <td>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className={classes.product_image}
+                  />
+                </td>
+                <td>
+                  <button
+                    className={classes.edit_button}
+                    onClick={() => handleEditClick(product)}
+                  >
+                    EDIT
+                  </button>
+                  <button
+                    className={classes.delete_button}
+                    onClick={() => handleDeleteProduct(product.id)}
+                  >
+                    DELETE
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 .container {
   width: 100%; /* Full width of the parent */
-  height: 100vh;
+  height: 1600px;
   max-width: 1200px; /* Maximum width for large screens */
   margin: 0 auto;
   background-image: linear-gradient(#a2a4a7, #fff);

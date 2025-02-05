@@ -19,11 +19,11 @@ const Store = () => {
             <div className={classes.product_info}>
               <h2 className={classes.product_name}>{product.name}</h2>
               <p className={classes.product_price}>{product.price} USD</p>
+              <Link to={`/order/${product.id}`}>
+                <button className={classes.order_button}>BUY IT!</button>
+              </Link>
             </div>
             {/* Передача id продукту через URL */}
-            <Link to={`/order/${product.id}`}>
-              <button className={classes.order_button}>ORDER!</button>
-            </Link>
           </div>
         ))}
       </div>

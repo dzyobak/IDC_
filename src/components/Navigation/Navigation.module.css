@@ -18,7 +18,8 @@
 }
 
 .link:hover {
-  color: black;
+  color: #fff;
+  background-color: #000;
 }
 
 .logo {

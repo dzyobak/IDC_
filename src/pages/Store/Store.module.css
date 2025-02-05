@@ -8,14 +8,14 @@
 
 .product_grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* 4 колонки в рядку */
   gap: 15px;
   justify-content: flex-start;
 }
 
 .product_card {
-  width: 200px;
-  height: 250px;
+  width: 260px;
+  height: 330px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -26,8 +26,8 @@
 }
 
 .product_image {
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;
   object-fit: cover;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .order_button {
-  width: 100%;
+  width: 100px;
   background-color: red;
   color: white;
   border: none;
