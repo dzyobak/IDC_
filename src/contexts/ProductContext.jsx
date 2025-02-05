@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { db } from "../firebase"; // Імпортуємо Firebase
+import { db } from "../firebase";
 import {
   collection,
   addDoc,
@@ -7,7 +7,7 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-} from "firebase/firestore"; // Імпортуємо Firestore функції
+} from "firebase/firestore";
 
 export const ProductContext = createContext();
 
@@ -17,7 +17,7 @@ export const ProductProvider = ({ children }) => {
   // Отримуємо продукти з Firestore при завантаженні додатка
   useEffect(() => {
     const fetchProducts = async () => {
-      const querySnapshot = await getDocs(collection(db, "products")); // Отримуємо всі продукти
+      const querySnapshot = await getDocs(collection(db, "products"));
       const productsList = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -28,13 +28,11 @@ export const ProductProvider = ({ children }) => {
     fetchProducts();
   }, []);
 
-  // Функція для додавання нового продукту до Firestore
+  // Додавання нового продукту
   const addProduct = async (product) => {
     try {
-      const docRef = await addDoc(collection(db, "products"), product); // Додаємо продукт до Firestore
+      const docRef = await addDoc(collection(db, "products"), product);
       console.log("Product added with ID: ", docRef.id);
-
-      // Оновлюємо локальний стан
       setProducts((prevProducts) => [
         ...prevProducts,
         { id: docRef.id, ...product },
@@ -44,13 +42,11 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-  // Функція для оновлення продукту в Firestore
+  // Оновлення продукту
   const updateProduct = async (id, updatedProduct) => {
     try {
-      const productRef = doc(db, "products", id); // Отримуємо посилання на продукт
-      await updateDoc(productRef, updatedProduct); // Оновлюємо дані в Firestore
-
-      // Оновлюємо локальний стан
+      const productRef = doc(db, "products", id);
+      await updateDoc(productRef, updatedProduct);
       setProducts((prevProducts) =>
         prevProducts.map((product) =>
           product.id === id ? { ...product, ...updatedProduct } : product
@@ -61,13 +57,11 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-  // Функція для видалення продукту з Firestore
+  // Видалення продукту
   const deleteProduct = async (id) => {
     try {
-      const productRef = doc(db, "products", id); // Отримуємо посилання на продукт
-      await deleteDoc(productRef); // Видаляємо продукт з Firestore
-
-      // Оновлюємо локальний стан
+      const productRef = doc(db, "products", id);
+      await deleteDoc(productRef);
       setProducts((prevProducts) =>
         prevProducts.filter((product) => product.id !== id)
       );
