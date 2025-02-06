@@ -88,12 +88,14 @@ const AdminPage = () => {
       <div className={classes.admin_wrapper}>
         <h1>ADMIN LOG IN</h1>
         <input
+          className={classes.admin_panel_inputs}
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
+          className={classes.admin_panel_inputs}
           type="password"
           placeholder="Password"
           value={password}
