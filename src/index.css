@@ -4,6 +4,7 @@
   -moz-user-select: none; /* Для Firefox */
   -ms-user-select: none; /* Для Internet Explorer */
   user-select: none; /* Стандарт для сучасних браузерів */
+  font-family: "Cherry Cream Soda", serif;
 }
 :root {
   font-family: "Cherry Cream Soda", serif;

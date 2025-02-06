@@ -40,21 +40,20 @@ const Store = () => {
           {cart.length === 0 ? (
             <p>Your cart is empty</p>
           ) : (
-            <ul>
+            <ul className={classes.cart_item_wrapper}>
               {cart.map((item, index) => (
                 <li key={index} className={classes.cart_item}>
-                  <div className={classes.cart_item_info}>
+                  <div className={classes.cart_image_and_text}>
                     <img
                       src={item.image} // Відображаємо фото продукту
                       alt={item.name}
                       className={classes.cart_item_image}
                     />
-                    <p>
+                    <p className={classes.cart_text}>
                       {item.name} - ${item.price} x {item.quantity}
                     </p>
                   </div>
-                  {/* Кнопки для зменшення та збільшення кількості продукту */}
-                  <div className={classes.cart_info_bottom}>
+                  <div className={classes.cart_functional}>
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
                       className={classes.decrement_button}
@@ -90,7 +89,12 @@ const Store = () => {
           )}
 
           <p className={classes.total_amount}>Total: ${calculateTotal()}</p>
-          <button onClick={() => alert("Proceed to Checkout")}>Checkout</button>
+          <button
+            onClick={() => alert("Proceed to Checkout")}
+            className={classes.cart_checkout_button}
+          >
+            Checkout
+          </button>
         </div>
       )}
 
@@ -109,7 +113,6 @@ const Store = () => {
                 <Link to={`/order/${product.id}`}>
                   <button className={classes.order_button}>BUY IT!</button>
                 </Link>
-                {/* Кнопка для додавання в кошик */}
                 <button
                   className={classes.add_to_cart_button}
                   onClick={() => addToCart(product)} // Додаємо продукт в кошик

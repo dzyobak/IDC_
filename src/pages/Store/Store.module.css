@@ -1,66 +1,10 @@
+/* Store.module.css */
 .store_wrapper {
   margin-top: 10px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.cart_button {
-  background-color: red;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  border: none;
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
-}
-
-.close_button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 24px;
-  cursor: pointer;
-  color: #333;
-}
-
-.close_button:hover {
-  color: red; /* Колір при наведенні */
-}
-
-.cart_sidebar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 400px;
-  height: 100%;
-  background-color: #fff;
-  border-left: 2px solid #ccc;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  z-index: 200;
-  overflow-y: auto;
-}
-
-.cart_sidebar h2 {
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
-.cart_sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.cart_sidebar button {
-  margin-top: 20px;
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 .product_grid {
@@ -127,6 +71,11 @@
   font-weight: bold;
 }
 
+.order_button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
 .add_to_cart_button {
   width: 100%;
   background-color: green;
@@ -141,10 +90,7 @@
 
 .add_to_cart_button:hover {
   background-color: #000;
-}
-
-a {
-  text-decoration: none;
+  color: #fff;
 }
 
 .button_wrapper {
@@ -153,43 +99,63 @@ a {
   justify-content: center;
 }
 
-.remove_button {
-  background: none;
-  color: black;
-  font-size: 16px;
-  padding: 0;
-  margin: 0;
-  border: none;
-  cursor: pointer;
-}
-
-.remove_button:hover {
-  background: none;
-}
-
-.cart_item {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 10px;
-}
-
-.add_button {
+/* Cart.module.css */
+.cart_button {
   background-color: red;
-  border: 1px solid #ccc;
-  padding: 3px 6px;
-  font-size: 12px;
+  color: white;
+  padding: 10px 20px;
   cursor: pointer;
-  margin: 0 5px;
+  font-size: 16px;
+  border: none;
+  position: fixed;
+  top: 20px;
+  right: 60px;
+  z-index: 100;
+  cursor: pointer;
 }
 
-.add_button {
-  background-color: #d4edda;
+.cart_button:hover {
+  background-color: #000;
+  color: #fff;
 }
 
-.total_amount {
-  font-weight: bold;
-  margin-top: 10px;
+.cart_sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background-color: #fff;
+  border-left: 2px solid #ccc;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 200;
+  overflow-y: auto;
+}
+
+.cart_sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.close_button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.close_button:hover {
+  color: red;
+}
+
+.cart_item_image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
 }
 
 .decrement_button,
@@ -203,6 +169,11 @@ a {
   text-align: center;
   padding: 0;
   margin: 0;
+  border: 0;
+}
+
+.decrement_button:hover {
+  background-color: none;
 }
 
 .quantity_input {
@@ -214,7 +185,6 @@ a {
   margin: 0 5px;
 }
 
-/* Прибираємо стрілочки в полі вводу */
 .quantity_input::-webkit-outer-spin-button,
 .quantity_input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -225,46 +195,61 @@ a {
   -moz-appearance: textfield;
 }
 
-/* Стилізація для кнопок + і - */
-.decrement_button,
-.increment_button {
+.remove_button {
   background: none;
   color: black;
   font-size: 16px;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  text-align: center;
   padding: 0;
-  margin: 0;
+  margin-left: 5px;
   border: none;
+  cursor: pointer;
+  margin-left: 60px;
 }
 
-.decrement_button:hover,
-.increment_button:hover {
+.remove_button:hover {
   background: none;
 }
 
-.cart_sidebar_upper {
+.total_amount {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.cart_image_and_text {
   display: flex;
   align-items: center;
 }
 
-.cart_item_info {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+.cart_text {
+  width: 100px;
 }
 
-.cart_item_image {
-  width: 50px;
+.cart_functional {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
   height: 50px;
-  object-fit: cover;
-  margin-right: 10px;
 }
 
-.cart_info_bottom {
+.cart_item {
   display: flex;
-  align-items: baseline;
-  margin-left: 10px;
+  align-items: center;
+  margin-left: 0;
+  margin-top: 10px;
+}
+
+.cart_checkout_button {
+  width: 100%;
+  margin-top: 10px;
+  height: 50px;
+  background-color: red;
+  border: 0;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cart_checkout_button:hover {
+  background-color: #000;
+  color: #fff;
 }
