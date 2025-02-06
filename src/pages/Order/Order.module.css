@@ -1,0 +1,103 @@
+.your_order_wrapper {
+  display: flex;
+  width: 1200px;
+  margin-top: 10px;
+}
+.left_side {
+  width: 600px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.right_side {
+  width: 600px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.right_side div {
+  margin-bottom: 10px;
+}
+
+.imgs_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  object-fit: cover;
+  width: 550px;
+  height: 550px;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 30px;
+}
+
+.price {
+  color: #000;
+}
+
+.choose_size_button {
+  width: 50px;
+  height: 25px;
+  border: 0;
+  background-color: red;
+  color: #fff;
+  margin-right: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.choose_size_button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.description_title {
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.buy_add_to_cart_buttons_section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.add_cart_button {
+  width: 300px;
+  height: 50px;
+  border: 0;
+  background-color: red;
+  color: #fff;
+  cursor: pointer;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.add_cart_button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.buy_button {
+  width: 300px;
+  height: 50px;
+  border: 0;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.buy_button:hover {
+  background-color: red;
+  color: #fff;
+}

@@ -60,9 +60,9 @@ const Order = () => {
           <h1>Order successfully created!</h1>
         </div>
       )}
-      <div className={classes.your_order}>
-        <h1>YOUR ORDER:</h1>
-        <div className={classes.your_order_wrapper}>
+
+      <div className={classes.your_order_wrapper}>
+        <div className={classes.left_side}>
           <div className={classes.imgs_wrapper}>
             <img
               src={product.image}
@@ -75,32 +75,36 @@ const Order = () => {
               className={classes.img}
             />
           </div>
-          <h1 className={classes.title}>{product.name}</h1>
-          <h2 className={classes.price}>{product.price} USD</h2>
-          <div>
-            <h2 className={classes.choose_size_text}>CHOOSE YOUR SIZE</h2>
-            <select
-              name="size"
-              id="size"
-              className={classes.choose_size}
-              value={formData.size}
-              onChange={(e) =>
-                setFormData({ ...formData, size: e.target.value })
-              }
-              required
-            >
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-            </select>
+        </div>
+        <div className={classes.right_side}>
+          <div className={classes.about_product_section}>
+            <h1 className={classes.title}>{product.name}</h1>
+            <h2 className={classes.price}>{product.price} USD</h2>
           </div>
-          <h3 className={classes.description}>
-            DESCRIPTION:
+          <div className={classes.choose_size_section}>
+            <h2 className={classes.choose_size_text}>SIZE:</h2>
+            <button className={classes.choose_size_button} value="S">
+              S
+            </button>
+            <button className={classes.choose_size_button} value="M">
+              M
+            </button>
+            <button className={classes.choose_size_button} value="L">
+              L
+            </button>
+          </div>
+          <div className={classes.buy_add_to_cart_buttons_section}>
+            <button className={classes.add_cart_button}>ADD TO CART</button>
+            <button className={classes.buy_button}>BUY IT NOW</button>
+          </div>
+          <div className={classes.description_section}>
+            <p className={classes.description_title}>DESCRIPTION:</p>
             <h4 className={classes.description_text}>{product.description}</h4>
-          </h3>
+          </div>
         </div>
       </div>
-      <div className={classes.order_form_wrapper}>
+
+      {/* <div className={classes.order_form_wrapper}>
         <h1 className={classes.check_out_text}>CHECK OUT:</h1>
         <hr className={classes.hr} />
         <form onSubmit={handleSubmit} className={classes.form}>
@@ -184,7 +188,7 @@ const Order = () => {
           />
           <button type="submit">CONFIRM ORDER!</button>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 };

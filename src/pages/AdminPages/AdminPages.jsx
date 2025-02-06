@@ -41,17 +41,22 @@ const AdminPage = () => {
 
     try {
       if (editProduct) {
-        await updateProduct(editProduct.id, newProduct);
-        setEditProduct(null);
+        const updatedData = { ...newProduct };
+        delete updatedData.id; // Firestore не дозволяє змінювати id
+
+        await updateProduct(editProduct.id, updatedData);
+        setEditProduct(null); // Очищення стану редагування
+        alert("Продукт оновлено!");
       } else {
         await addProduct({
           ...newProduct,
           price: parseFloat(newProduct.price),
         });
+        alert("Продукт додано!");
       }
       setNewProduct({ name: "", price: "", image: "", description: "" });
-      alert(editProduct ? "Продукт оновлено!" : "Продукт додано!");
-    } catch {
+    } catch (error) {
+      console.error("Помилка при збереженні продукту:", error); // Логування помилки
       alert("Помилка при збереженні продукту!");
     }
   };
@@ -72,22 +77,16 @@ const AdminPage = () => {
     setNewProduct({ ...product });
   };
 
-  // Скидання форми для додавання нового продукту
+  // Додавання продукту без редагування
   const handleAddNewProduct = () => {
     setEditProduct(null);
-    setNewProduct({
-      name: "",
-      price: "",
-      image: "",
-      description: "",
-    });
+    setNewProduct({ name: "", price: "", image: "", description: "" });
   };
 
   if (!isAuthenticated) {
     return (
       <div className={classes.admin_wrapper}>
-        <h1 className={classes.enter_password_input_text}>ADMIN LOG IN</h1>
-        <hr className={classes.hr2} />
+        <h1>ADMIN LOG IN</h1>
         <input
           type="email"
           placeholder="Email"
@@ -109,77 +108,90 @@ const AdminPage = () => {
 
   return (
     <div className={classes.admin_wrapper}>
-      <div className={classes.add_product_form}>
-        <h1>ADMIN PANEL</h1>
-        {/* <hr className={classes.hr} /> */}
-        <h2>{editProduct ? "EDIT PRODUCT" : "ADD NEW PRODUCT"}</h2>
+      <h1 className={classes.admin_panel_text}>ADMIN PANEL</h1>
+      <h2>{editProduct ? "EDIT PRODUCT" : "ADD NEW PRODUCT"}</h2>
 
-        {["name", "price", "image", "description"].map((field) => (
-          <input
-            key={field}
-            type={field === "price" ? "number" : "text"}
-            name={field}
-            placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-            value={newProduct[field]}
-            onChange={handleInputChange}
-          />
-        ))}
+      <input
+        className={classes.admin_panel_inputs}
+        type="text"
+        name="name"
+        placeholder="Name"
+        value={newProduct.name}
+        onChange={handleInputChange}
+      />
+      <input
+        className={classes.admin_panel_inputs}
+        type="number"
+        name="price"
+        placeholder="Price"
+        value={newProduct.price}
+        onChange={handleInputChange}
+      />
+      <input
+        className={classes.admin_panel_inputs}
+        type="text"
+        name="image"
+        placeholder="Image URL"
+        value={newProduct.image}
+        onChange={handleInputChange}
+      />
+      <textarea
+        className={classes.admin_panel_inputs}
+        name="description"
+        placeholder="Description"
+        value={newProduct.description}
+        onChange={handleInputChange}
+      />
 
-        <button onClick={handleSaveProduct}>
-          {editProduct ? "UPDATE PRODUCT" : "ADD"}
-        </button>
-        {/* Кнопка для додавання нового продукту */}
-        <button
-          onClick={handleAddNewProduct}
-          className={classes.add_new_product_button}
-        >
-          ADD NEW PRODUCT!
-        </button>
-      </div>
-      {/* Список продуктів */}
-      <div className={classes.product_list}>
-        <h2>PRODUCT LIST</h2>
-        {/* <hr className={classes.hr2} /> */}
-        <table className={classes.product_table}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Image</th>
-              <th>Actions</th>
+      <button onClick={handleSaveProduct} className={classes.buttons}>
+        {editProduct ? "UPDATE PRODUCT" : "ADD"}
+      </button>
+
+      {/* Кнопка для додавання нового продукту */}
+      <button onClick={handleAddNewProduct} className={classes.buttons}>
+        ADD NEW PRODUCT
+      </button>
+
+      <h2 className={classes.prodcut_list_text}>PRODUCT LIST</h2>
+      <table className={classes.product_table}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product) => (
+            <tr key={product.id}>
+              <td className={classes.name_td}>{product.name}</td>
+              <td className={classes.price_td}>{product.price} USD</td>
+              <td className={classes.img_td}>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className={classes.product_image}
+                />
+              </td>
+              <td className={classes.button_td}>
+                <button
+                  onClick={() => handleEditClick(product)}
+                  className={classes.buttons}
+                >
+                  EDIT
+                </button>
+                <button
+                  onClick={() => handleDeleteProduct(product.id)}
+                  className={classes.buttons}
+                >
+                  DELETE
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {products.map((product) => (
-              <tr key={product.id}>
-                <td>{product.name}</td>
-                <td>{product.price} USD</td>
-                <td>
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className={classes.product_image}
-                  />
-                </td>
-                <td>
-                  <button
-                    className={classes.edit_button}
-                    onClick={() => handleEditClick(product)}
-                  >
-                    EDIT
-                  </button>
-                  <button
-                    className={classes.delete_button}
-                    onClick={() => handleDeleteProduct(product.id)}
-                  >
-                    DELETE
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

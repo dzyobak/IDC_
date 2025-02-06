@@ -7,6 +7,7 @@ import {
   updateDoc,
   deleteDoc,
   doc,
+  getDoc,
 } from "firebase/firestore";
 
 export const ProductContext = createContext();
@@ -14,17 +15,22 @@ export const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
-  // Отримуємо продукти з Firestore при завантаженні додатка
-  useEffect(() => {
-    const fetchProducts = async () => {
+  // Функція отримання всіх продуктів
+  const fetchProducts = async () => {
+    try {
       const querySnapshot = await getDocs(collection(db, "products"));
       const productsList = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setProducts(productsList);
-    };
+    } catch (error) {
+      console.error("Помилка завантаження продуктів:", error);
+    }
+  };
 
+  // Завантаження продуктів при старті
+  useEffect(() => {
     fetchProducts();
   }, []);
 
@@ -32,13 +38,9 @@ export const ProductProvider = ({ children }) => {
   const addProduct = async (product) => {
     try {
       const docRef = await addDoc(collection(db, "products"), product);
-      console.log("Product added with ID: ", docRef.id);
-      setProducts((prevProducts) => [
-        ...prevProducts,
-        { id: docRef.id, ...product },
-      ]);
+      setProducts((prev) => [...prev, { id: docRef.id, ...product }]);
     } catch (error) {
-      console.error("Error adding product: ", error);
+      console.error("Помилка додавання продукту:", error);
     }
   };
 
@@ -47,26 +49,21 @@ export const ProductProvider = ({ children }) => {
     try {
       const productRef = doc(db, "products", id);
       await updateDoc(productRef, updatedProduct);
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === id ? { ...product, ...updatedProduct } : product
-        )
+      setProducts((prev) =>
+        prev.map((p) => (p.id === id ? { id, ...updatedProduct } : p))
       );
     } catch (error) {
-      console.error("Error updating product: ", error);
+      console.error("Помилка оновлення продукту:", error);
     }
   };
 
   // Видалення продукту
   const deleteProduct = async (id) => {
     try {
-      const productRef = doc(db, "products", id);
-      await deleteDoc(productRef);
-      setProducts((prevProducts) =>
-        prevProducts.filter((product) => product.id !== id)
-      );
+      await deleteDoc(doc(db, "products", id));
+      setProducts((prev) => prev.filter((p) => p.id !== id));
     } catch (error) {
-      console.error("Error deleting product: ", error);
+      console.error("Помилка видалення продукту:", error);
     }
   };
 

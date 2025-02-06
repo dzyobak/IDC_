@@ -55,7 +55,7 @@
   margin-top: 0;
 }
 
-.admin_wrapper input {
+.admin_panel_inputs {
   all: unset;
   border: 2px solid black;
   width: 100%; /* Ширина інпутів */
@@ -63,7 +63,7 @@
   border-radius: 0;
   box-sizing: border-box;
   font-size: 1rem;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .login_button {
@@ -87,10 +87,10 @@
 .product_table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
 }
 
-.product_table th,
-.product_table td {
+.product_table th {
   border: 1px solid black;
   padding: 8px;
   text-align: left;
@@ -121,4 +121,35 @@
 
 .product_list h2 {
   margin-bottom: 5px;
+}
+
+.buttons {
+  width: 200px;
+  border: 0;
+  background-color: red;
+  color: #fff;
+  height: 30px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.buttons:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.name_td,
+.price_td,
+.img_td,
+.button_td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.prodcut_list_text {
+  margin-top: 10px;
+}
+
+.admin_panel_text {
+  margin-bottom: 10px;
 }
