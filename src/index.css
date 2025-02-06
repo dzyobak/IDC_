@@ -13,3 +13,7 @@
   color: rgb(100, 0, 0);
   background-color: #000;
 }
+
+a {
+  text-decoration: none;
+}
